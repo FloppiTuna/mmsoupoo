@@ -25,7 +25,7 @@ end
 -- Validate the peripheral map by checking that every defined peripheral is actually connected.
 for name, periph in pairs(periphMap) do
     if not peripheral.isPresent(name) then
-        error("Peripheral '" .. name .. "' is defined in the map but not connected.")
+        warn("Peripheral '" .. name .. "' is defined in the map but not connected. Run \"pwiz.lua\" to update the map or ensure your peripheral cables are not severed properly.")
     end
 end
 
