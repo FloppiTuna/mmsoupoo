@@ -1,4 +1,4 @@
-local function runRemote(common)
+local function init(common)
     local logger = common.createLogger("remote")
 
     local whitelistedIds = {
@@ -14,7 +14,7 @@ local function runRemote(common)
         if not whitelistedIds[id] then
             -- logger.log("Discarding message from non-whitelisted ID: " .. id)
         else
-            logger.log("Received message from " .. id .. ": " .. textutils.serialize(message))
+            logger.debug("Received message from " .. id .. ": " .. textutils.serialize(message))
 
             -- Parse the message
             -- Format: "namespace:function(args)"
@@ -26,7 +26,7 @@ local function runRemote(common)
 
             -- Does the message have a namespace?
             if #parts < 2 then
-                logger.log("Invalid message format from " .. id .. ": " .. message)
+                logger.debug("Invalid message format from " .. id .. ": " .. message)
                 rednet.send(id, "NACK:ERRFORMAT")
             else 
                 os.queueEvent(parts[1], id, parts[2])
@@ -36,4 +36,4 @@ local function runRemote(common)
 
 end
 
-return runRemote
+return init

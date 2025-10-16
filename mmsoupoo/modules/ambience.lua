@@ -40,7 +40,7 @@ local function runAmbienceMusic(common, logger, ambiencePeripherals, ambiencePat
             file.close() -- Important to close file handles.
 
             -- Play audio using AUKit
-            logger.log("Playing " .. filename)
+            logger.debug("Playing " .. filename)
             local iterator, length = aukit.stream.dfpwm(data)
             -- local player
             player = aukit.player(
@@ -110,7 +110,7 @@ end
 
 local function init(common)
     local logger = common.createLogger("ambience")
-    local ambiencePath = "data/ambience"
+    local ambiencePath = "mmsoupoo/data/ambience"
 
     local ambiencePeripherals = {}
     for _, periph in pairs(common.periphMap) do

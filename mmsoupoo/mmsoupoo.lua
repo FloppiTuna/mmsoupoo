@@ -1,12 +1,12 @@
 local aukit = require "aukit"
 
-print(require("data.splash"))
+print(require("data/splash"))
 
 -- Load the peripheral map (periph.map).
 local periphMap
 
-if fs.exists("data/periph.map") then
-    local mapFile = fs.open("data/periph.map", "r")
+if fs.exists("mmsoupoo/periph.map") then
+    local mapFile = fs.open("mmsoupoo/periph.map", "r")
     local mapContent = mapFile.readAll()
 
     -- Parse the file as JSON.
@@ -25,18 +25,23 @@ end
 -- Validate the peripheral map by checking that every defined peripheral is actually connected.
 for name, periph in pairs(periphMap) do
     if not peripheral.isPresent(name) then
-        warn("Peripheral '" .. name .. "' is defined in the map but not connected. Run \"pwiz.lua\" to update the map or ensure your peripheral cables are not severed properly.")
+        error("Peripheral '" .. name .. "' is defined in the map but not connected.")
     end
 end
 
 local function createLogger(moduleName)
     return {
+        debug = function(message)
+            term.setTextColor(colors.gray)
+            print("[" .. moduleName .. "] dbg: " .. message)
+            term.setTextColor(colors.white)
+        end,
         log = function(message)
-            print("[" .. moduleName .. "] " .. message)
+            print("[" .. moduleName .. "] info: " .. message)
         end,
         warn = function(message)
             term.setTextColor(colors.yellow)
-            print("[" .. moduleName .. "] WARNING: " .. message)
+            print("[" .. moduleName .. "] warning: " .. message)
             term.setTextColor(colors.white)
         end,
         error = function(message)
@@ -53,6 +58,9 @@ local common = {
     createLogger = createLogger,
 }
 
+local rootLogger = common.createLogger("mmsoupoo")
+
+
 function common:signalAmbience(signalData)
     common.ambienceSignal = signalData
 end
@@ -62,6 +70,7 @@ local modules = {
     -- "modules/franky",
     "modules/ambience",
     "modules/remote",
+    "modules/overwatch"
 }
 
 local moduleRunners = {}
@@ -73,7 +82,7 @@ for _, modulePath in ipairs(modules) do
             for k, v in pairs(common) do moduleCommon[k] = v end
             local success, err = pcall(module, moduleCommon)
             if success then
-                common.createLogger(modulePath).log("Module exited gracefully.")
+                rootLogger.warn("Module " .. modulePath .. " has exited. If this is intended, ensure it is classified as a Oneshot.")
             else 
                 error("Failed to run module '" .. modulePath .. "': " .. err)
             end
