@@ -1,12 +1,12 @@
 local aukit = require "aukit"
 
-print(require("data/splash"))
+print(require("./data/splash"))
 
 -- Load the peripheral map (periph.map).
 local periphMap
 
-if fs.exists("mmsoupoo/periph.map") then
-    local mapFile = fs.open("mmsoupoo/periph.map", "r")
+if fs.exists("./periph.map") then
+    local mapFile = fs.open("./periph.map", "r")
     local mapContent = mapFile.readAll()
 
     -- Parse the file as JSON.
