@@ -1,5 +1,5 @@
-local aukit = require "aukit"
-local loop = require "/taskmaster"()
+local aukit = require "../libs/aukit"
+local loop = require "../libs/taskmaster"()
 
 local seekTarg = -1
 local player
