@@ -12,7 +12,7 @@ local function init(common)
 
         -- Discard messages from non-whitelisted IDs
         if not whitelistedIds[id] then
-            -- logger.log("Discarding message from non-whitelisted ID: " .. id)
+            logger.debug("Discarding message from non-whitelisted ID: " .. id)
         else
             logger.debug("Received message from " .. id .. ": " .. textutils.serialize(message))
 

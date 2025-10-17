@@ -3,8 +3,8 @@ print(require("./data/splash"))
 -- Load the peripheral map (periph.map).
 local periphMap
 
-if fs.exists("./data/periph.map") then
-    local mapFile = fs.open("./data/periph.map", "r")
+if fs.exists("data/periph.map") then
+    local mapFile = fs.open("data/periph.map", "r")
     local mapContent = mapFile.readAll()
 
     -- Parse the file as JSON.
@@ -66,9 +66,9 @@ end
 -- Load and run modules in parallel
 local modules = {
     -- "modules/franky",
-    "./modules/ambience",
-    "./modules/remote",
-    "./modules/overwatch"
+    "modules/ambience",
+    "modules/remote",
+    "modules/overwatch"
 }
 
 local moduleRunners = {}

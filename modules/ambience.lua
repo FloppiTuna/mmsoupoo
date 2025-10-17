@@ -110,7 +110,7 @@ end
 
 local function init(common)
     local logger = common.createLogger("ambience")
-    local ambiencePath = "mmsoupoo/data/ambience"
+    local ambiencePath = "data/ambience"
 
     local ambiencePeripherals = {}
     for _, periph in pairs(common.periphMap) do
