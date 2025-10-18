@@ -15,8 +15,11 @@ local function playClip(name)
     local data = file.readAll()
     file.close()
 
+    print("bang")
     local iterator, length = aukit.stream.dfpwm(data)
+    print("pow")
     aukit.play(iterator, function() end, 0.5, peripheral.find("speaker")) -- Play at 50% volume
+    print("BOOM")
 
 end
 
