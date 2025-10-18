@@ -45,11 +45,20 @@ local function init(common)
     logger.log("Total defined clips: " .. tostring(#map.clips) .. ".")
     logger.log("Total defined aliases: " .. tostring(#map.aliases) .. ".")
 
-    -- Test: play every single clip once
-    for key, _ in pairs(map.clips) do
-        logger.log("Playing clip: " .. key)
-        playClip(key)
-    end
+    parallel.waitForAny(
+        -- event loop
+        function()
+            while true do
+                local event, id, data = os.pullEvent("overwatch")
+                logger.log("Received overwatch event: " .. tostring(data))
+                if data and type(data) == "string" then
+                    playClip(data)
+                else
+                    logger.warn("Invalid overwatch event data: " .. tostring(data))
+                end
+            end
+        end
+    )
 end
 
 return init
