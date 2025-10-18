@@ -120,6 +120,11 @@ local function init(common)
     end
     logger.log("Found " .. #ambiencePeripherals .. " ambience peripherals.")
 
+    if #ambiencePeripherals == 0 then
+        logger.error("No ambience peripherals allocated.")
+        return
+    end
+
     parallel.waitForAny(
         function() runAmbienceMusic(common, logger, ambiencePeripherals, ambiencePath) end,
         function() eventLoop(common, logger) end
