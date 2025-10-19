@@ -68,7 +68,7 @@ local modules = {
     "modules/ambience",
     "modules/remote",
     "modules/overwatch",
-    -- "modules/clock",
+    "modules/clock",
 }
 
 rootLogger.log("Modules to load: " .. textutils.serialize(modules))

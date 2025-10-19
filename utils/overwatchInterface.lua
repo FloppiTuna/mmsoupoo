@@ -20,6 +20,7 @@ overwatchInterface.playNumber = function(number)
     else
         local tens = math.floor(number / 10) * 10
         local ones = number % 10
+        print("Tens: " .. tostring(tens) .. ", Ones: " .. tostring(ones))
         os.queueEvent("overwatch", nil, tostring(tens))
         if ones > 0 then
             os.queueEvent("overwatch", nil, tostring(ones))

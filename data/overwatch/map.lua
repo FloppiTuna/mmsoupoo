@@ -39,6 +39,11 @@ local clips = {
 
     ["-"] = "numbers/places/negative.dfpwm",
     ["."] = "numbers/places/point.dfpwm",
+
+    -- Facilities
+    ["sodium_mfg"] = "facilities/sodium_mfg.dfpwm"
+
+
 }
 
 local aliases = {

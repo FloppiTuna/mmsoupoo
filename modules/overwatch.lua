@@ -6,28 +6,22 @@ local aukit = require(_G.WORKING_DIR .. "/libs/aukit")
 local function playClip(name)
     -- fetch path from map
     local clipPath = _G.WORKING_DIR .. "/data/overwatch/" .. map.clips[name]
-    -- play with cc.audio.dfpwm using a reader function so AUKit streams from
-    -- the file handle (this prevents issues caused by passing a single
-    -- readAll string to the dfpwm streamer which could cause duplicated
-    -- playback)
-    local file = fs.open(clipPath, "rb")
-    if not file then
-        error("Clip file not found: " .. clipPath)
+
+    local dfpwm = require("cc.audio.dfpwm")
+    local speaker = peripheral.find("speaker")
+
+    -- for some reason (god knows why) AUKit has this bug where it just plays the file twice.
+    -- why?? who motherfuckin knows!!! as a workaround im just using the manual dfpwm decoder/playback
+    -- aukit pls fix ur stuff..unless im a dumb idiot which i will not be putting out of the question
+    
+    local decoder = dfpwm.make_decoder()
+    for chunk in io.lines(clipPath, 16 * 1024) do
+        local buffer = decoder(chunk)
+
+        while not speaker.playAudio(buffer) do
+            os.pullEvent("speaker_audio_empty")
+        end
     end
-
-    -- Create a reader function that returns chunks from the file. AUKit's
-    -- stream functions accept either a string or a function; using a
-    -- function keeps the file handle open while decoding/playback occurs.
-    local function reader()
-        return file.read(48000)
-    end
-
-    local iterator, length = aukit.stream.dfpwm(reader)
-    aukit.play(iterator, function() end, 0.5, peripheral.find("speaker")) -- Play at 50% volume
-
-    -- Close the file after playback completes
-    file.close()
-
 end
 
 
@@ -52,16 +46,37 @@ local function init(common)
     logger.log("Total defined clips: " .. tostring(#map.clips) .. ".")
     logger.log("Total defined aliases: " .. tostring(#map.aliases) .. ".")
 
+    -- Use a simple in-memory queue and two parallel tasks:
+    -- 1) producer: pulls "overwatch" events, logs them and enqueues clip names
+    -- 2) consumer: waits for items in the queue and runs playClip on them
+    local playQueue = {}
+
     parallel.waitForAny(
-        -- event loop
-        function()
+        function() -- producer: consumes os.pullEvent("overwatch") and enqueues
             while true do
                 local event, id, data = os.pullEvent("overwatch")
                 logger.log("Received overwatch event: " .. tostring(data))
                 if data and type(data) == "string" then
-                    playClip(data)
+                    table.insert(playQueue, data)
+                    -- wake consumer
+                    os.queueEvent("overwatch_play")
                 else
                     logger.warn("Invalid overwatch event data: " .. tostring(data))
+                end
+            end
+        end,
+
+        function() -- consumer: processes queue and plays clips sequentially
+            while true do
+                if #playQueue == 0 then
+                    -- wait until producer signals there's work
+                    os.pullEvent("overwatch_play")
+                end
+
+                local name = table.remove(playQueue, 1)
+                if name then
+                    logger.log("Playing overwatch clip: " .. name)
+                    playClip(name)
                 end
             end
         end
