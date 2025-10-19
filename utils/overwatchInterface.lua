@@ -1,5 +1,4 @@
 -- interfacing library for the overwatch system
-local map = require("../data/overwatch/map")
 
 local overwatchInterface = {}
 
