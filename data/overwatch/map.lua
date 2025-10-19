@@ -54,6 +54,13 @@ local clips = {
     ["am"] = "time/am.dfpwm",
     ["pm"] = "time/pm.dfpwm",
 
+    -- Chimes
+    ["chime1"] = "chimes/chime1.dfpwm",
+    ["chime2"] = "chimes/chime2.dfpwm",
+    ["chime3"] = "chimes/chime3.dfpwm",
+    ["chime4"] = "chimes/chime4.dfpwm",
+    ["chime5"] = "chimes/chime5.dfpwm",
+    ["chime7"] = "chimes/chime7.dfpwm",
 
     -- Intros (?)
     ["the_time_is"] = "intros/the_time_is.dfpwm"
