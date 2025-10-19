@@ -1,7 +1,6 @@
 -- Add working directory to global
 _G.WORKING_DIR = fs.getDir(shell.getRunningProgram())
 print("Working directory set to: " .. _G.WORKING_DIR)
-shell.exit()
 
 -- make common object yay
 local common = {
