@@ -47,6 +47,8 @@ local function init(common)
                     overwatchInterface.playClip("pm")
                 end
 
+                overwatchInterface.playClip("chime1")
+
                 -- Wait for five minutes
                 os.sleep(300)
             end
