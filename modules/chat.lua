@@ -3,9 +3,9 @@ local overwatchInterface = require(_G.WORKING_DIR .. "/utils/overwatchInterface"
 local function sendChat(mes, cb)
     local tag = {
         {
-            text = "MMSoUPoO",
-            underlined = true,
-            color = "red",
+            ["text"] = "MMSoUPoO",
+            ["underlined"] = true,
+            ["color"] = "red",
         }
     }
 
