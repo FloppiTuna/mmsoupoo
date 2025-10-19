@@ -1,5 +1,5 @@
-local aukit = require "../libs/aukit"
-local loop = require "../libs/taskmaster"()
+local aukit = require(_G.WORKING_DIR .. "/libs/aukit")
+local loop = require(_G.WORKING_DIR .. "/libs/taskmaster")()
 
 local seekTarg = -1
 local player
@@ -110,7 +110,7 @@ end
 
 local function init(common)
     local logger = common.createLogger("ambience")
-    local ambiencePath = "data/ambience"
+    local ambiencePath = _G.WORKING_DIR .. "/data/ambience"
 
     local ambiencePeripherals = {}
     for _, periph in pairs(common.periphMap) do
