@@ -55,7 +55,7 @@ local function init(common)
         function() -- producer: consumes os.pullEvent("overwatch") and enqueues
             while true do
                 local event, id, data = os.pullEvent("overwatch")
-                logger.log("Received overwatch event: " .. tostring(data))
+                logger.debug("Received overwatch event: " .. tostring(data))
                 if data and type(data) == "string" then
                     table.insert(playQueue, data)
                     -- wake consumer
@@ -75,7 +75,6 @@ local function init(common)
 
                 local name = table.remove(playQueue, 1)
                 if name then
-                    logger.log("Playing overwatch clip: " .. name)
                     playClip(name)
                 end
             end

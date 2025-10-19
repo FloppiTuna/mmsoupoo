@@ -8,12 +8,23 @@ function init(common)
         local event, username, message, uuid, isHidden, messageUtf8 = os.pullEvent("chat")
         local wakeword = string.find(message, "mmsoup")
         if wakeword == 1 then
-            logger.log("WakeWord detected, parsing message: ".. message)
+            logger.debug("WakeWord detected, parsing message: ".. message)
 
             local words = {}
             for str in string.gmatch(message, "([^".." ".."]+)") do
                 table.insert(words,str)
             end
+
+            if words[2] == "test_announce" then
+                logger.debug("Test announce command received from chat by " .. username)
+                overwatchInterface.playClip("chime1")
+                overwatchInterface.playClip("chime2")
+                overwatchInterface.playClip("chime3")
+                overwatchInterface.playClip("chime4")
+                overwatchInterface.playClip("chime5")
+                overwatchInterface.playClip("chime7")
+            end
+
         end
     end
 end
