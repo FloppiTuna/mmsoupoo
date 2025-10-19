@@ -46,6 +46,15 @@ local clips = {
     -- Facilities
     ["sodium_mfg"] = "facilities/sodium_mfg.dfpwm",
 
+    -- Time
+    ["midnight"] = "time/midnight.dfpwm",
+    ["noon"] = "time/noon.dfpwm",
+    ["oclock"] = "time/oclock.dfpwm",
+    ["exactly"] = "time/exactly.dfpwm",
+    ["am"] = "time/am.dfpwm",
+    ["pm"] = "time/pm.dfpwm",
+
+
     -- Intros (?)
     ["the_time_is"] = "intros/the_time_is.dfpwm"
 

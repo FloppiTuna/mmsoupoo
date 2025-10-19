@@ -7,26 +7,46 @@ local function init(common)
     local logger = common.createLogger("clock")
 
     parallel.waitForAny(
-        -- test: every minute, announce the time
+        -- Every five real life minutes:
+        --   * Announce the time
         function()
             while true do
                 local time = os.date("*t")
                 local hour = time.hour
-                local min = time.min
+                local minute = time.min
 
-                logger.log(string.format("Announcing time: %02d:%02d", hour, min))
+                logger.debug(string.format("Announcing time: %02d:%02d", hour, minute))
 
                 overwatchInterface.playClip("the_time_is")
 
                 -- Announce hour
-                overwatchInterface.playNumber(hour)
+                if hour == 0 then
+                    overwatchInterface.playClip("midnight")
+                elseif hour == 12 then
+                    overwatchInterface.playClip("noon")
+                else
+                    if hour > 12 then
+                        hour = hour - 12
+                    end
+                    overwatchInterface.playNumber(hour)
+                end
 
                 -- Announce minute
-                overwatchInterface.playNumber(min)
+                if minute == 0 then
+                    overwatchInterface.playClip("oclock")
+                else
+                    overwatchInterface.playNumber(minute)
+                end
 
-                -- Wait until the start of the next minute
-                local sleepTime = 60 - time.sec
-                os.sleep(sleepTime)
+                -- Announce am/pm
+                if time.hour < 12 then
+                    overwatchInterface.playClip("am")
+                else
+                    overwatchInterface.playClip("pm")
+                end
+
+                -- Wait for five minutes
+                os.sleep(300)
             end
         end
     )
