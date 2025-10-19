@@ -1,5 +1,4 @@
 -- interfacing library for the overwatch system
-
 local overwatchInterface = {}
 
 overwatchInterface.playClip = function(clipName)
