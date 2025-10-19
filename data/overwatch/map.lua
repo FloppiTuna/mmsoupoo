@@ -40,8 +40,14 @@ local clips = {
     ["-"] = "numbers/places/negative.dfpwm",
     ["."] = "numbers/places/point.dfpwm",
 
+    -- Verbs
+    ["is"] = "verbs/is.dfpwm",
+
     -- Facilities
-    ["sodium_mfg"] = "facilities/sodium_mfg.dfpwm"
+    ["sodium_mfg"] = "facilities/sodium_mfg.dfpwm",
+
+    -- Intros (?)
+    ["the_time_is"] = "intros/the_time_is.dfpwm"
 
 
 }
