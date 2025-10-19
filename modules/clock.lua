@@ -1,7 +1,7 @@
 -- Sample overwatch test module.
 -- Announces the time every minute
 
-local overwatchInterface = require("../utils/overwatchInterface")
+local overwatchInterface = require(".../utils/overwatchInterface")
 
 local function init(common)
     local logger = common.createLogger("clock")
