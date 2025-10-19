@@ -1,5 +1,5 @@
 -- Add working directory to global
-_G.WORKING_DIR = fs.getDir(shell.getRunningProgram())
+_G.WORKING_DIR = "/" .. fs.getDir(shell.getRunningProgram())
 print("Working directory set to: " .. _G.WORKING_DIR)
 
 -- make common object yay
