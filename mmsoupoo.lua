@@ -69,6 +69,7 @@ local modules = {
     "modules/remote",
     "modules/overwatch",
     "modules/clock",
+    "modules/chat",
 }
 
 rootLogger.log("Modules to load: " .. textutils.serialize(modules))
