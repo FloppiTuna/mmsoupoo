@@ -1,15 +1,20 @@
 local overwatchInterface = require(_G.WORKING_DIR .. "/utils/overwatchInterface")
 
 local function sendChat(mes, cb)
-    local tag = {
+    local payload = {
         {
-            ["text"] = "MMSoUPoO",
-            ["underlined"] = true,
-            ["color"] = "red",
+            text = "MMSoUPoO",
+            underlined = true,
+            color = "red",
+        },
+        {
+            text = ": " .. mes,
+            color = "gray",
+            italic = true
         }
     }
 
-    cb.sendFormattedMessage(mes, textutils.serialiseJSON(tag))
+    cb.sendFormattedMessage(textutils.serialiseJSON(payload))
 end
 
 function init(common)
