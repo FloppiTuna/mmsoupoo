@@ -39,7 +39,7 @@ function init(common)
 
             if words[2] == "test_announce" then
                 logger.debug("Test announce command received from chat by " .. username)
-                sendChat("Alright I'm going don't hit me", cb)
+                sendChat("Okay.", cb)
                 overwatchInterface.playClip("chime1")
                 overwatchInterface.playClip("chime2")
                 overwatchInterface.playClip("chime3")
