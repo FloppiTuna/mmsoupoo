@@ -15,7 +15,14 @@ local function init(common)
             while true do
                 local count = #meBridge.listItems()
                 logger.debug("itemcount: " .. tostring(count))
+                overwatchInterface.playClip("there")
+                overwatchInterface.playClip("are")
+                overwatchInterface.playClip("currently")
                 overwatchInterface.playNumber(count)
+                overwatchInterface.playClip("items")
+                overwatchInterface.playClip("in")
+                overwatchInterface.playClip("matter_energy")
+                overwatchInterface.playClip("system")
                 os.sleep(10) -- Announce every 10 seconds
             end
         end
