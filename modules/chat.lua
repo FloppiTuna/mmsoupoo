@@ -3,9 +3,13 @@ local overwatchInterface = require(_G.WORKING_DIR .. "/utils/overwatchInterface"
 local function sendChat(mes, cb)
     local payload = {
         {
-            text = "MMSoUPoO: ",
+            text = "MMSoUPoO:",
             underlined = true,
             color = "red",
+        },
+        {
+            text = " ",
+            underlined = false,
         },
         {
             text = mes,
