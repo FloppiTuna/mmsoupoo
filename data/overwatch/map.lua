@@ -42,9 +42,31 @@ local clips = {
 
     -- Verbs
     ["is"] = "verbs/is.dfpwm",
+    ["are"] = "verbs/are.dfpwm",
+
+    -- prepositions
+    ["in"] = "prepositions/in.dfpwm",
+
+    -- nouns
+    ["detonation"] = "nouns/detonation.dfpwm",
+    ["items"] = "nouns/items.dfpwm",
+    ["system"] = "nouns/system.dfpwm",
+
+    -- misc
+    ["there"] = "misc/there.dfpwm",
 
     -- Facilities
     ["sodium_mfg"] = "facilities/sodium_mfg.dfpwm",
+    ["matter_energy"] = "facilities/matter_energy.dfpwm",
+    ["district"] = "facilities/district.dfpwm",
+
+    -- adverbs
+    ["currently"] = "adverbs/currently.dfpwm",
+
+    -- adjectives
+    ["current"] = "adjectives/current.dfpwm",
+    ["nuclear"] = "adjectives/nuclear.dfpwm",
+    ["self_destruct"] = "adjectives/self_destruct.dfpwm",
 
     -- Time
     ["midnight"] = "time/midnight.dfpwm",
