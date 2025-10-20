@@ -23,7 +23,7 @@ local function init(common)
                 overwatchInterface.playClip("in")
                 overwatchInterface.playClip("matter_energy")
                 overwatchInterface.playClip("system")
-                os.sleep(10) -- Announce every 10 seconds
+                os.sleep(30) -- Announce every 10 seconds
             end
         end
     )
