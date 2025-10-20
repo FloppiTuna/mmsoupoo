@@ -65,10 +65,10 @@ end
 -- Load and run modules in parallel
 local modules = {
     -- "modules/franky",
-    "modules/ambience",
-    "modules/remote",
     "modules/overwatch",
     "modules/clock",
+    "modules/ambience",
+    "modules/remote",
     "modules/chat",
 }
 
