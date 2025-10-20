@@ -16,7 +16,7 @@ local function init(common)
                 local count = #meBridge.listItems()
                 logger.debug("itemcount: " .. tostring(count))
                 overwatchInterface.playNumber(count)
-                os.sleep(60) -- Announce every 60 seconds
+                os.sleep(10) -- Announce every 10 seconds
             end
         end
     )
