@@ -17,7 +17,7 @@ local function init(common)
 
                 logger.debug(string.format("Announcing time: %02d:%02d", hour, minute))
 
-                os.queueEvent("ambience", "pause")
+                os.queueEvent("ambience", nil, "pause")
 
                 overwatchInterface.playClip("chime1")
                 overwatchInterface.playClip("the_time_is")
@@ -49,8 +49,8 @@ local function init(common)
                 end
 
                 overwatchInterface.playClip("chime1")
-                
-                os.queueEvent("ambience", "play")
+
+                os.queueEvent("ambience", nil, "play")
 
                 -- Wait for five minutes
                 os.sleep(300)
