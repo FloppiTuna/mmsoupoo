@@ -70,6 +70,7 @@ local modules = {
     "modules/ambience",
     "modules/remote",
     "modules/chat",
+    "modules/me"
 }
 
 rootLogger.log("Modules to load: " .. textutils.serialize(modules))

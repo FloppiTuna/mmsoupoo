@@ -1,4 +1,4 @@
-local overwatchInterface = require "overwatchInterface"
+local overwatchInterface = require(_G.WORKING_DIR .. "/utils/overwatchInterface")
 -- AE2 Matter Energy Module.
 
 local function init(common)
@@ -13,7 +13,9 @@ local function init(common)
     parallel.waitForAny(
         function()
             while true do
-                overwatchInterface.playNumber(#meBridge.listItems())
+                local count = #meBridge.listItems()
+                logger.debug("itemcount: " .. tostring(count))
+                overwatchInterface.playNumber(count)
                 os.sleep(60) -- Announce every 60 seconds
             end
         end
