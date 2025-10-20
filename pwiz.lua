@@ -1,4 +1,6 @@
 -- Testing peripheral mapping.
+_G.WORKING_DIR = "/" .. fs.getDir(shell.getRunningProgram())
+
 local dfpwm = require("cc.audio.dfpwm")
 local decoder = dfpwm.make_decoder()
 
@@ -22,8 +24,8 @@ local peripheralMap = {}
 
 -- Load existing mapping from file if it exists.
 local mapContent = ""
-if fs.exists("mmsoupoo/periph.map") then
-    local mapFile = fs.open("mmsoupoo/periph.map", "r")
+if fs.exists(_G.WORKING_DIR .. "/data/periph.map") then
+    local mapFile = fs.open(_G.WORKING_DIR .. "/data/periph.map", "r")
     mapContent = mapFile.readAll()
     mapFile.close()
 end
@@ -112,7 +114,7 @@ while true do
                     local function playLoop()
                         while running do
                             -- Play "identify.dfpwm" sound file
-                            for chunk in io.lines("mmsoupoo/data/identify.dfpwm", 16 * 1024) do
+                            for chunk in io.lines(_G.WORKING_DIR .. "/data/identify.dfpwm", 16 * 1024) do
                                 local buffer = decoder(chunk)
 
                                 while not peripheral.playAudio(buffer) do
@@ -161,12 +163,12 @@ while true do
                     filteredMap[name] = info
                 end
             end
-            local outFile = fs.open("mmsoupoo/periph.map", "w")
+            local outFile = fs.open(_G.WORKING_DIR .. "/data/periph.map", "w")
             outFile.write(textutils.serializeJSON(filteredMap))
             outFile.close()
 
             -- Repopulate mapContent
-            local mapFile = fs.open("mmsoupoo/periph.map", "r")
+            local mapFile = fs.open(_G.WORKING_DIR .. "/data/periph.map", "r")
             mapContent = mapFile.readAll()
             mapFile.close()
 
@@ -200,12 +202,12 @@ while true do
                     filteredMap[name] = info
                 end
             end
-            local outFile = fs.open("mmsoupoo/periph.map", "w")
+            local outFile = fs.open(_G.WORKING_DIR .. "/data/periph.map", "w")
             outFile.write(textutils.serializeJSON(filteredMap))
             outFile.close()
 
             -- Repopulate mapContent
-            local mapFile = fs.open("mmsoupoo/periph.map", "r")
+            local mapFile = fs.open(_G.WORKING_DIR .. "/data/periph.map", "r")
             mapContent = mapFile.readAll()
             mapFile.close()
 
