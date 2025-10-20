@@ -3,7 +3,7 @@ local overwatchInterface = require(_G.WORKING_DIR .. "/utils/overwatchInterface"
 
 local function init(common)
     local logger = common.createLogger("me")
-    local meBridge = peripheral.wrap("meBridge")
+    local meBridge = peripheral.wrap("meBridge_0")
 
     if not meBridge then
         logger.error("ME Bridge peripheral not found. Ensure it is connected and named correctly.")
