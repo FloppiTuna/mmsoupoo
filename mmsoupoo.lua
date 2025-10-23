@@ -1,6 +1,5 @@
 -- Add working directory to global
 _G.WORKING_DIR = "/" .. fs.getDir(shell.getRunningProgram())
-print("Working directory set to: " .. _G.WORKING_DIR)
 
 -- make common object yay
 local common = {
@@ -52,7 +51,7 @@ if fs.exists(_G.WORKING_DIR .. "/data/periph.map") then
 
     mapFile.close()
 else
-    error("Peripheral map not found. Run \"pwiz.lua\".")
+    error("Peripheral map does not exist. Run the Peripheral Wizard to create one (pwiz.lua).")
 end
 
 -- Validate the peripheral map by checking that every defined peripheral is actually connected.
@@ -73,7 +72,7 @@ local modules = {
     "modules/me"
 }
 
-rootLogger.log("Modules to load: " .. textutils.serialize(modules))
+rootLogger.debug("Modules to load: " .. textutils.serialize(modules))
 
 local moduleRunners = {}
 for _, modulePath in ipairs(modules) do
@@ -84,14 +83,13 @@ for _, modulePath in ipairs(modules) do
             for k, v in pairs(common) do moduleCommon[k] = v end
             local success, err = pcall(module, moduleCommon)
             if success then
-                rootLogger.warn("Module " ..
-                modulePath .. " has exited. If this is intended, ensure it is classified as a Oneshot.")
+                rootLogger.warn("Module " .. modulePath .. " has exited.")
             else
-                error("Failed to run module '" .. modulePath .. "': " .. err)
+                rootLogger.error("Module '" .. modulePath .. "' has crashed! It said: " .. err)
             end
         end)
     else
-        error("Module '" .. modulePath .. "' does not export a function.")
+        rootLogger.warn("'" .. modulePath .. "' is not a valid module (expected init function, but got " .. type(module) .. "!)")
     end
 end
 
