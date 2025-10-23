@@ -11,18 +11,19 @@ local function init(common)
     end
 
     parallel.waitForAny(
+        -- example thing eventually we can do some resource monitoring stuff or smth
         function()
             while true do
                 local count = #meBridge.listItems()
                 logger.debug("itemcount: " .. tostring(count))
-                overwatchInterface.playClip("there")
-                overwatchInterface.playClip("are")
-                overwatchInterface.playClip("currently")
-                overwatchInterface.playNumber(count)
-                overwatchInterface.playClip("items")
-                overwatchInterface.playClip("in")
-                overwatchInterface.playClip("matter_energy")
-                overwatchInterface.playClip("system")
+                -- overwatchInterface.playClip("there")
+                -- overwatchInterface.playClip("are")
+                -- overwatchInterface.playClip("currently")
+                -- overwatchInterface.playNumber(count)
+                -- overwatchInterface.playClip("items")
+                -- overwatchInterface.playClip("in")
+                -- overwatchInterface.playClip("matter_energy")
+                -- overwatchInterface.playClip("system")
                 os.sleep(30) -- Announce every 10 seconds
             end
         end
