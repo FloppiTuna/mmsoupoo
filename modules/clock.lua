@@ -2,6 +2,8 @@
 -- Announces the time every minute
 
 local overwatchInterface = require(_G.WORKING_DIR .. "/utils/overwatchInterface")
+local map = require(_G.WORKING_DIR .. "/data/overwatch/map")
+
 
 local function init(common)
     local logger = common.createLogger("clock")
@@ -36,6 +38,11 @@ local function init(common)
 
                 -- Announce minute
                 if minute == 0 then
+                    if hour == 0 or hour == 12 then
+                        -- "midnight o'clock" sounds stupid as fuck
+                    else
+                        overwatchInterface.playClip("oclock")
+                    end
                     overwatchInterface.playClip("oclock")
                 else
                     overwatchInterface.playNumber(minute)
@@ -50,7 +57,14 @@ local function init(common)
 
                 overwatchInterface.playClip("chime1")
 
-                -- os.queueEvent("ambience", nil, "play")
+                -- wait a few seconds
+                os.sleep(3)
+
+                -- Play a random advertisement clip
+
+
+
+
 
                 -- Wait for five minutes
                 os.sleep(300)

@@ -18,10 +18,8 @@ local function playClip(name)
     for chunk in io.lines(clipPath, 16 * 1024) do
         local buffer = decoder(chunk)
 
-        for _, spkr in pairs(peripheral.find("speaker")) do
-            while not peripheral.wrap(spkr).playAudio(buffer) do
-                os.pullEvent("speaker_audio_empty")
-            end
+        while not speaker.playAudio(buffer) do
+            os.pullEvent("speaker_audio_empty")
         end
     end
 end

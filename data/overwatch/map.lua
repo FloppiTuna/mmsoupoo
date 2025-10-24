@@ -132,7 +132,14 @@ local aliases = {
     ["point"] = ".",
 }
 
+local announcements = {
+    "static_announcements/theater.dfpwm",
+    "static_announcements/software_liabilities.dfpwm",
+}
+
+
 return {
     clips = clips,
     aliases = aliases,
+    announcements = announcements
 }
