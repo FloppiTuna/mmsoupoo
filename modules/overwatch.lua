@@ -19,7 +19,7 @@ local function playClip(name)
         local buffer = decoder(chunk)
 
         for _, spkr in pairs(peripheral.find("speaker")) do
-            while not spkr.playAudio(buffer) do
+            while not peripheral.wrap(spkr).playAudio(buffer) do
                 os.pullEvent("speaker_audio_empty")
             end
         end
