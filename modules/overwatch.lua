@@ -18,19 +18,10 @@ local function playClip(name)
     for chunk in io.lines(clipPath, 16 * 1024) do
         local buffer = decoder(chunk)
 
-        -- Attempt to start playback on all available speakers in parallel.
-        -- This prevents one busy speaker from blocking others.
-        local playFuncs = {}
         for _, spkr in pairs(peripheral.find("speaker")) do
-            table.insert(playFuncs, function()
-                while not spkr.playAudio(buffer) do
-                    os.pullEvent("speaker_audio_empty")
-                end
-            end)
-        end
-
-        if #playFuncs > 0 then
-            parallel.waitForAll(table.unpack(playFuncs))
+            while not spkr.playAudio(buffer) do
+                os.pullEvent("speaker_audio_empty")
+            end
         end
     end
 end
